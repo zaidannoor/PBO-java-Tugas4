@@ -5,14 +5,20 @@
  */
 package app;
 
+import java.security.NoSuchAlgorithmException;
+
 /**
  *
  * @author Lenovo
  */
 public class Main {
-    public static void main(String[] args) {
-        Connector koneksi = new Connector();
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        //Connector koneksi = new Connector();
         Regis regis = new Regis();
         //Login login = new Login();
+        
+		
     }
+    
+    
 }

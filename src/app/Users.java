@@ -5,6 +5,7 @@
  */
 package app;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import javax.swing.*;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ import java.sql.SQLException;
  */
 public class Users {
     Connector connector = new Connector();
-    
+    SHA256 sha256 = new SHA256();
     
     
     public int getUserByUsername(String username){
@@ -44,7 +45,8 @@ public class Users {
         }
     }
     
-    public int insertUserToDatabase(String username, String password){
+    public int insertUserToDatabase(String username, String password) throws NoSuchAlgorithmException{
+        password = sha256.generate(password);
         try {
             String query = "INSERT INTO users (username,password) "
                     + "VALUES ('"+username+"','"+password+"')";
@@ -60,6 +62,8 @@ public class Users {
             return 0;
         }
     }
+    
+    
     
     
 }

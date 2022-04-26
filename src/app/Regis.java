@@ -5,15 +5,18 @@
  */
 package app;
 
+import java.security.NoSuchAlgorithmException;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Lenovo
  */
-public class Regis extends JFrame {
+public class Regis extends JFrame  {
     Connector connector = new Connector();
     
     //DEKLARASI KOMPONEN
@@ -26,7 +29,7 @@ public class Regis extends JFrame {
     
     JButton btnRegis = new JButton("Registrasi");
     JButton btnClose = new JButton("Close");
-    public Regis(){
+    public Regis() throws NoSuchAlgorithmException{
         window.setLayout(null);
         window.setSize(350,200);
         window.setVisible(true);
@@ -55,17 +58,26 @@ public class Regis extends JFrame {
         
         btnRegis.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)  {
                 Users user = new Users();
-                if(user.getUserByUsername(getUsername()) > 0){  
-                    JOptionPane.showMessageDialog(null,"Registrasi gagal !!");
-                    JOptionPane.showMessageDialog(null,"username telah digunakan orang lain, silahkan coba username lain !!");  
+                if(getUsername().equals("") || getPassword().equals("")){
+                    JOptionPane.showMessageDialog(null,"Username atau password tidak boleh kosong");
                 }
                 else{
-                    user.insertUserToDatabase(getUsername(), getPassword());
-                    // Login login = new Login();
+                    if(user.getUserByUsername(getUsername()) > 0){  
+                        JOptionPane.showMessageDialog(null,"Registrasi gagal !!");
+                        JOptionPane.showMessageDialog(null,"username telah digunakan orang lain, silahkan coba username lain !!");  
+                    }
+                    else{
+                        try {
+                            user.insertUserToDatabase(getUsername(), getPassword());
+                            // Login login = new Login();
+                        } catch (NoSuchAlgorithmException ex) {
+                            Logger.getLogger(Regis.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
-                
+                              
             }
         });
         
