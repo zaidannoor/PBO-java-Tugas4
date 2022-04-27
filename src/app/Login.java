@@ -65,7 +65,7 @@ public class Login extends JFrame {
         btnClose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                System.exit(0);
+                System.exit(0); // close program
             }
         });
         
@@ -75,16 +75,18 @@ public class Login extends JFrame {
                 Users user = new Users();
                 String data[][] = new String[1][3];
                 data = user.getUserByUsername(getUsername()); // mengambil data dari database
-                // mengecek ada atau tidak username tersebut di database
-                if(data[0][0] == null){
+               
+                if(data[0][0] == null){ // mengecek ada atau tidak username tersebut di database
+                                        // jika tidak ada maka tampilkan pesan kesalahan
                     JOptionPane.showMessageDialog(null,"Username anda tidak terdaftar dalam aplikasi kami");
                     JOptionPane.showMessageDialog(null,"Mohon cek kembali username anda");
                 }
-                else{
-                    String password = getPassword();
-                    String passwordDB = data[0][2];
+                else{ // jika ada maka kerjakan perintah berikut
+                    String password = getPassword(); // mengambil inputan password user
+                    String passwordDB = data[0][2]; // mengambil password yang didapat dari query getUserByUsername
                     try {
-                        if(user.passwordMatch(password,passwordDB)){
+                        if(user.passwordMatch(password,passwordDB)){ // mengecek password inputan dengan password di database
+                                                                    // lebih jelasnya bisa lihat method passwordMatch di model users
                             JOptionPane.showMessageDialog(null,"Login Berhasil");
                         }
                         else{
@@ -103,8 +105,8 @@ public class Login extends JFrame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 try {
-                    window.setVisible(false);
-                    Regis regis = new Regis();
+                    window.setVisible(false); // membuat view login menjadi tak terlihat
+                    Regis regis = new Regis(); // memanggil view regis
                 } catch (NoSuchAlgorithmException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }

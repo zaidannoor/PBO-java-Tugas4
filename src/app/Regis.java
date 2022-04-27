@@ -70,8 +70,8 @@ public class Regis extends JFrame  {
                         // jika username tidak ada di database maka menjalankan method insertusertodatabase
                           try {
                             user.insertUserToDatabase(getUsername(), getPassword());
-                            Login login = new Login();
-                            window.setVisible(false);
+                            Login login = new Login(); // memanggil view halaman login
+                            window.setVisible(false); // membuat view regis menjadi tak terlihat
                             } catch (NoSuchAlgorithmException ex) {
                             Logger.getLogger(Regis.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -88,7 +88,7 @@ public class Regis extends JFrame  {
         btnClose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                System.exit(0);
+                System.exit(0); // close program
             }
         });
     }

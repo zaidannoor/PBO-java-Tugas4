@@ -40,19 +40,18 @@ public class Users {
             System.out.println(ex.getMessage());
             
         }finally{
-            System.out.println(data[0][1]);
             return data;
         }
     }
     
     public int insertUserToDatabase(String username, String password) throws NoSuchAlgorithmException{
-        password = sha256.generate(password);
+        password = sha256.generate(password); // melakukan hash password
         try {
             String query = "INSERT INTO users (username,password) "
                     + "VALUES ('"+username+"','"+password+"')";
             
             connector.statement = connector.koneksi.createStatement();
-            connector.statement.executeUpdate(query);
+            connector.statement.executeUpdate(query); // eksekusi query
 
             JOptionPane.showMessageDialog(null,"Registrasi Berhasil !!");
             return 1;

@@ -6,7 +6,6 @@
 package app;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 /**
  *
@@ -14,7 +13,6 @@ import java.util.Arrays;
  */
 public class Main {
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        //Regis regis = new Regis();
         Login login = new Login();
 
     }
