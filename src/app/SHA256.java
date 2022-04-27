@@ -13,7 +13,7 @@ import java.security.SecureRandom;
  * @author Lenovo
  */
 public class SHA256 {
-    
+    // method untuk hash password
     public String generate(String str) throws NoSuchAlgorithmException{
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(str.getBytes());

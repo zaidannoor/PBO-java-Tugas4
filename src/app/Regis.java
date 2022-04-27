@@ -59,22 +59,24 @@ public class Regis extends JFrame  {
         btnRegis.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)  {
-                Users user = new Users();
-                String data[][] = new String[1][3];
+                Users user = new Users(); // instansiasi objek user
+                String data[][] = new String[1][3]; // deklarasi variabel data bertipe String
                 data = user.getUserByUsername(getUsername()); // mengambil data dari database
                 if(getUsername().equals("") || getPassword().equals("")){
                     JOptionPane.showMessageDialog(null,"Username atau password tidak boleh kosong");
                 }
                 else{
                     if(data[0][0] == null){  
+                        // jika username tidak ada di database maka menjalankan method insertusertodatabase
                           try {
                             user.insertUserToDatabase(getUsername(), getPassword());
-                            // Login login = new Login();
+                            Login login = new Login();
+                            window.setVisible(false);
                             } catch (NoSuchAlgorithmException ex) {
                             Logger.getLogger(Regis.class.getName()).log(Level.SEVERE, null, ex);
                             }
                     }
-                    else{
+                    else{ // jika ada maka tampilkan pesan kesalahan
                         JOptionPane.showMessageDialog(null,"Registrasi gagal !!");
                         JOptionPane.showMessageDialog(null,"username telah digunakan orang lain, silahkan coba username lain !!");
                     }

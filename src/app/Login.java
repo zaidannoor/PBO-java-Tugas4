@@ -7,6 +7,9 @@ package app;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Lenovo
@@ -21,13 +24,15 @@ public class Login extends JFrame {
         JTextField tfusername = new JTextField();
     JLabel lpassword= new JLabel("password  ");
         JTextField tfpassword = new JTextField();
+    JLabel regis = new JLabel("Belum punya akun ? ");
     
     JButton btnLogin = new JButton("Login");
     JButton btnClose = new JButton("Close");
+    JButton btnRegis = new JButton("Regis");
     
     public Login(){
         window.setLayout(null);
-        window.setSize(350,200);
+        window.setSize(350,240);
         window.setVisible(true);
         window.setLocationRelativeTo(null);
         window.setResizable(false);
@@ -35,23 +40,27 @@ public class Login extends JFrame {
         
         // ADD Component
             window.add(judul);
+            window.add(regis);
             window.add(lusername);
             window.add(lpassword);
             window.add(tfusername);
             window.add(tfpassword);
             window.add(btnLogin);
             window.add(btnClose);
+            window.add(btnRegis);
         
         // Atur Letak
             judul.setBounds(110, 12, 120, 20);
             lusername.setBounds(5, 45, 120, 20);
             lpassword.setBounds(5, 70, 120, 20);
+            regis.setBounds(55,155,125,20);
 
             tfusername.setBounds(85, 45, 125, 20);
             tfpassword.setBounds(85, 70, 125, 20);
 
             btnLogin.setBounds(65, 110, 80, 20);
             btnClose.setBounds(175, 110, 80, 20);
+            btnRegis.setBounds(180,155,80,20);
         
         btnClose.addActionListener(new ActionListener() {
             @Override
@@ -63,15 +72,42 @@ public class Login extends JFrame {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-//                Users user = new Users();
-//                // mengecek ada atau tidak username tersebut di database
-//                if(user.getUserByUsername(getUsername()) > 0){
-//                    
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null,"Username anda tidak terdaftar dalam aplikasi kami");
-//                    JOptionPane.showMessageDialog(null,"Mohon cek kembali username anda");
-//                }
+                Users user = new Users();
+                String data[][] = new String[1][3];
+                data = user.getUserByUsername(getUsername()); // mengambil data dari database
+                // mengecek ada atau tidak username tersebut di database
+                if(data[0][0] == null){
+                    JOptionPane.showMessageDialog(null,"Username anda tidak terdaftar dalam aplikasi kami");
+                    JOptionPane.showMessageDialog(null,"Mohon cek kembali username anda");
+                }
+                else{
+                    String password = getPassword();
+                    String passwordDB = data[0][2];
+                    try {
+                        if(user.passwordMatch(password,passwordDB)){
+                            JOptionPane.showMessageDialog(null,"Login Berhasil");
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"Login gagal, password anda salah");
+                            JOptionPane.showMessageDialog(null,"tolong masukkan pasword anda dengan beanr");;
+                        }
+                    } catch (NoSuchAlgorithmException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+            }
+        });
+        
+        btnRegis.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                try {
+                    window.setVisible(false);
+                    Regis regis = new Regis();
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

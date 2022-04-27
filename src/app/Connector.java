@@ -11,11 +11,11 @@ import java.sql.*;
  * @author Lenovo
  */
 public class Connector {
-    String DBurl = "jdbc:mysql://localhost/tugasjdbc";
-    String DBusername = "root";
-    String DBpassword = "";
-    Connection koneksi;
-    Statement statement;
+    protected String DBurl = "jdbc:mysql://localhost/tugasjdbc";
+    protected String DBusername = "root";
+    protected String DBpassword = "";
+    protected Connection koneksi;
+    protected Statement statement;
     public Connector() {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
