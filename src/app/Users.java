@@ -20,9 +20,9 @@ public class Users {
     Connector connector = new Connector();
     SHA256 sha256 = new SHA256();
     
-    
-    public int getUserByUsername(String username){
-        String data[][] = new String[2][3];
+
+    public String[][] getUserByUsername(String username){
+        String data[][] = new String[1][3];
         int jmlData = 0;
         try{
             String query = "SELECT * FROM users WHERE username='"+username+"'";
@@ -40,8 +40,8 @@ public class Users {
             System.out.println(ex.getMessage());
             
         }finally{
-            System.out.println(jmlData);
-            return jmlData;
+            System.out.println(data[0][1]);
+            return data;
         }
     }
     
@@ -62,6 +62,27 @@ public class Users {
             return 0;
         }
     }
+    
+//    public int passwordMatch(String password){
+//        String data[][] = new String[1][3];
+//        int jmlData = 0;
+//        try{
+//            String query = "SELECT * FROM users WHERE username='"+username+"'";
+//            connector.statement = connector.koneksi.createStatement();
+//            ResultSet resultSet = connector.statement.executeQuery(query);
+//            while(resultSet.next()){ //konversi tabel ke string
+//                data[jmlData][0] = resultSet.getString("id"); 
+//                data[jmlData][1] = resultSet.getString("username"); 
+//                data[jmlData][2] = resultSet.getString("password");
+//                jmlData++; 
+//            }
+//            connector.statement.close();
+//           
+//        }catch(Exception ex){
+//            System.out.println(ex.getMessage());
+//            
+//        }
+//   }
     
     
     

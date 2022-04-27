@@ -59,5 +59,27 @@ public class Login extends JFrame {
                 System.exit(0);
             }
         });
+        
+        btnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+//                Users user = new Users();
+//                // mengecek ada atau tidak username tersebut di database
+//                if(user.getUserByUsername(getUsername()) > 0){
+//                    
+//                }
+//                else{
+//                    JOptionPane.showMessageDialog(null,"Username anda tidak terdaftar dalam aplikasi kami");
+//                    JOptionPane.showMessageDialog(null,"Mohon cek kembali username anda");
+//                }
+            }
+        });
+    }
+    
+    public String getUsername(){
+        return tfusername.getText();
+    }
+    public String getPassword(){
+        return tfpassword.getText();
     }
 }
